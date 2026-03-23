@@ -1,11 +1,17 @@
-"""Domain entities representing the core data structures of the RAG system."""
+"""Domain layer entities: pure data definitions for documents and their derived chunks.
 
-from dataclasses import dataclass
-from typing import Optional
+This module belongs to the domain layer and must not import from application or infrastructure.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
 
 
 @dataclass
 class Document:
+    """A source academic paper loaded from a PDF file."""
+
     id: str
     filename: str
     raw_text: str
@@ -13,8 +19,10 @@ class Document:
 
 @dataclass
 class Chunk:
+    """A fixed-size text segment derived from a Document, optionally carrying its embedding vector."""
+
     id: str
     document_id: str
     text: str
     page_number: int
-    embedding: Optional[list[float]]
+    embedding: list[float] | None = field(default=None)
