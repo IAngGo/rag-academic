@@ -7,7 +7,7 @@ class PDFParserPort(ABC):
     """Port for parsing PDF files into raw text."""
 
     @abstractmethod
-    def parse(self, file_path: str) -> str: ...
+    def parse(self, file_path: str) -> list[tuple[int, str]]: ...
 
 
 class EmbedderPort(ABC):
